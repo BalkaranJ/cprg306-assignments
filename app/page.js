@@ -5,6 +5,9 @@ export default function Home() {
     <div>
       <h1>My Assignments</h1>
       <p><Link href="/week-2" style={{ color: 'blue', textDecoration: 'underline'}}>Go To Week 2</Link></p>
+      <p><Link href="/week-3" style={{ color: 'blue', textDecoration: 'underline'}}>Go To Week 3</Link></p>
+      <p><Link href="/week-4" style={{ color: 'blue', textDecoration: 'underline'}}>Go To Week 4</Link></p>
+
     </div>
   );
 }
