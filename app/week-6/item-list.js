@@ -25,17 +25,27 @@ export default function ItemList() {
     <div className="bg-white p-6 rounded-lg shadow-md w-96 mx-auto">
       <h2 className="text-xl font-semibold mb-4 text-center">Shopping List</h2>
 
-      {/* Sorting Dropdown */}
-      <label className="text-left font-medium">Sort By:</label>
-      <select
-        className="border p-2 rounded w-full mb-4"
-        value={sortBy}
-        onChange={(e) => setSortBy(e.target.value)}
-      >
-        <option value="name">Name</option>
-        <option value="category">Category</option>
-        <option value="quantity">Quantity</option>
-      </select>
+      {/* Sorting Buttons */}
+      <div className="flex justify-center space-x-2 mb-4">
+        <button
+          className={`px-4 py-2 rounded ${sortBy === "name" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          onClick={() => setSortBy("name")}
+        >
+          Name
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${sortBy === "category" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          onClick={() => setSortBy("category")}
+        >
+          Category
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${sortBy === "quantity" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          onClick={() => setSortBy("quantity")}
+        >
+          Quantity
+        </button>
+      </div>
 
       {/* Render Items */}
       <ul className="divide-y divide-gray-300">
