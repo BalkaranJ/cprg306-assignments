@@ -22,7 +22,7 @@ export default function NewItem() {
     event.preventDefault();
     const item = { name, quantity, category};
     console.log(item);
-    alert('Item Added:\nName: ${name}\nQuantity: ${quantity}\nCategory: ${category}');
+    alert(`Item Added:\nName: ${name}\nQuantity: ${quantity}\nCategory: ${category}`);
     setName('');
     setQuantity(1);
     setCategory('produce');
@@ -34,10 +34,7 @@ export default function NewItem() {
   
         <form 
           className="flex flex-col space-y-4"
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert(`Item Added:\nName: ${name}\nQuantity: ${quantity}\nCategory: ${category}`);
-          }}
+          onSubmit={handleSubmit}
         >
           {/* Item Name Input */}
           <label className="text-left font-medium">Name:</label>
