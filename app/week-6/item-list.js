@@ -1,36 +1,48 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Item from "./item";
 
-const ItemList = () => {
-    const items = [
-        { name: "milk, 4 L 🥛", quantity: 1, category: "dairy" },
-        { name: "bread 🍞", quantity: 2, category: "bakery" },
-        { name: "eggs, dozen 🥚", quantity: 2, category: "dairy" },
-        { name: "bananas 🍌", quantity: 6, category: "produce" },
-        { name: "broccoli 🥦", quantity: 3, category: "produce" },
-        { name: "chicken breasts, 1 kg 🍗", quantity: 1, category: "meat" },
-        { name: "pasta sauce 🍝", quantity: 3, category: "canned goods" },
-        { name: "spaghetti, 454 g 🍝", quantity: 2, category: "dry goods" },
-        { name: "toilet paper, 12 pack 🧻", quantity: 1, category: "household" },
-        { name: "paper towels, 6 pack", quantity: 1, category: "household" },
-        { name: "dish soap 🍽️", quantity: 1, category: "household" },
-        { name: "hand soap 🧼", quantity: 4, category: "household" },
-    ];
+export default function ItemList() {
+  const [items, setItems] = useState([]);
+  const [sortBy, setSortBy] = useState("name"); // Default sorting by name
 
-    return (
-        <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-            <h1 className="text-2xl font-bold mb-6">Shopping List</h1>
-            <ul>
-                {items.map((item, index) => (
-                    <Item
-                        key={index}
-                        name={item.name}
-                        quantity={item.quantity}
-                        category={item.category}
-                    />
-                ))}
-            </ul>
-        </div>
-    );
-};
+  useEffect(() => {
+    // Dynamically import JSON file
+    import("./items.json")
+      .then((data) => setItems(data.default))
+      .catch((error) => console.error("Error loading items:", error));
+  }, []);
 
-export default ItemList;
+  // Sorting function
+  const sortedItems = [...items].sort((a, b) => {
+    if (sortBy === "name") return a.name.localeCompare(b.name);
+    if (sortBy === "category") return a.category.localeCompare(b.category);
+    if (sortBy === "quantity") return a.quantity - b.quantity;
+  });
+
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md w-96 mx-auto">
+      <h2 className="text-xl font-semibold mb-4 text-center">Shopping List</h2>
+
+      {/* Sorting Dropdown */}
+      <label className="text-left font-medium">Sort By:</label>
+      <select
+        className="border p-2 rounded w-full mb-4"
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+      >
+        <option value="name">Name</option>
+        <option value="category">Category</option>
+        <option value="quantity">Quantity</option>
+      </select>
+
+      {/* Render Items */}
+      <ul className="divide-y divide-gray-300">
+        {sortedItems.map((item) => (
+          <Item key={item.id} {...item} />
+        ))}
+      </ul>
+    </div>
+  );
+}
