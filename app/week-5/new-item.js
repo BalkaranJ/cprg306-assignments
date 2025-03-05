@@ -3,7 +3,11 @@
 import { useState } from "react";
 
 export default function NewItem() {
+
+  //Initializing State Variables
   const [quantity, setQuantity] = useState(1);
+  const [name, setName] = useSate('');
+  const [category, setCategory] = useSate('produce');
 
   const increment = () => {
     setQuantity((prevQuantity) => (prevQuantity < 20 ? prevQuantity + 1 : prevQuantity));
@@ -12,6 +16,17 @@ export default function NewItem() {
   const decrement = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : prevQuantity));
   };
+
+  //handleSubmit function which will manage form submissions
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const item = { name, quantity, category};
+    console.log(item);
+    alert('Item Added:\nName: ${name}\nQuantity: ${quantity}\nCategory: ${category}');
+    setName('');
+    setQuantity(1);
+    setCategory('produce');
+  }
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md text-center">
