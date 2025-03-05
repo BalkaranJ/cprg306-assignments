@@ -6,8 +6,8 @@ export default function NewItem() {
 
   //Initializing State Variables
   const [quantity, setQuantity] = useState(1);
-  const [name, setName] = useSate('');
-  const [category, setCategory] = useSate('produce');
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('produce');
 
   const increment = () => {
     setQuantity((prevQuantity) => (prevQuantity < 20 ? prevQuantity + 1 : prevQuantity));
@@ -59,6 +59,23 @@ export default function NewItem() {
           +
         </button>
       </div>
+
+      <select value={category} onChange={(e) => setCategory (e.target.value)}className="border p-2 rounded w-full">
+        <option value="produce">Produce</option>
+        <option value="dairy">Dairy</option>
+        <option value="meat">Meat</option>
+        <option value="bread">Bread</option>
+        <option value="canned">Canned</option>
+        <option value="frozen">Frozen</option>
+        <option value="snacks">Snacks</option>
+        <option value="beverages">Beverages</option>
+        <option value="household">Household</option>
+        <option value="other">Personal</option>
+      </select>
+
+        <button className="bg-blue-500 text-white px-4 y-2 rounded hover:bg-blue-600 active:scale-95">
+          Add Item
+        </button>
     </div>
   );
 }

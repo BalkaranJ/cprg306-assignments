@@ -7,6 +7,7 @@ export default function Home() {
       <p><Link href="/week-2" style={{ color: 'blue', textDecoration: 'underline'}}>Go To Week 2</Link></p>
       <p><Link href="/week-3" style={{ color: 'blue', textDecoration: 'underline'}}>Go To Week 3</Link></p>
       <p><Link href="/week-4" style={{ color: 'blue', textDecoration: 'underline'}}>Go To Week 4</Link></p>
+      <p><Link href="/week-5" style={{ color: 'blue', textDecoration: 'underline'}}>Go To Week 5</Link></p>
 
     </div>
   );
