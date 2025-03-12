@@ -3,16 +3,9 @@
 import { useState, useEffect } from "react";
 import Item from "./item";
 
-export default function ItemList() {
-  const [items, setItems] = useState([]);
+export default function ItemList({ items }) {
   const [sortBy, setSortBy] = useState("name"); // Default sorting by name
 
-  useEffect(() => {
-    // Dynamically import JSON file
-    import("./items.json")
-      .then((data) => setItems(data.default))
-      .catch((error) => console.error("Error loading items:", error));
-  }, []);
 
   // Sorting function
   const sortedItems = [...items].sort((a, b) => {

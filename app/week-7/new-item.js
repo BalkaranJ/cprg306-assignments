@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function NewItem() {
+export default function NewItem({ onAddItem }) {
 
   //Initializing State Variables
   const [quantity, setQuantity] = useState(1);
@@ -20,9 +20,17 @@ export default function NewItem() {
   //handleSubmit function which will manage form submissions
   const handleSubmit = (event) => {
     event.preventDefault();
-    const item = { name, quantity, category};
-    console.log(item);
-    alert(`Item Added:\nName: ${name}\nQuantity: ${quantity}\nCategory: ${category}`);
+
+    //Prevent empty item names
+    if (!name.trim()) return;
+
+    //Create a new item object
+    const newItem = { name, quantity, category};
+
+    //Call the function passed from the parent component
+    onAddItem(newItem);
+
+    //Reset the form
     setName('');
     setQuantity(1);
     setCategory('produce');
@@ -32,10 +40,7 @@ export default function NewItem() {
       <div className="bg-white p-6 rounded-lg shadow-md w-96 mx-auto">
         <h2 className="text-xl font-semibold mb-4 text-center">Add a New Item</h2>
   
-        <form 
-          className="flex flex-col space-y-4"
-          onSubmit={handleSubmit}
-        >
+        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
           {/* Item Name Input */}
           <label className="text-left font-medium">Name:</label>
           <input
@@ -44,6 +49,7 @@ export default function NewItem() {
             className="border p-2 rounded w-full"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
   
           {/* Quantity Controls */}

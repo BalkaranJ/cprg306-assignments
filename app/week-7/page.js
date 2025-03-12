@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import NewItem from "./new-item";
-import Link from "next/link";
 import ItemList from "./item-list";
-import itemsData from "./items-data";
+import itemsData from "./items.json";
 
 export default function Page() {
 
