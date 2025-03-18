@@ -38,4 +38,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Project Title: Cprg 306 Assignments (Web Dev 2)
 Description: This Project folder is for the projects I will create weekly labeled as week-1 and so on. 
 Installation Instructions: This folder uses, npx 
-Usage: 
+Usage: In Terminal, when in the correct directory, type "npm run dev" to host the environment 
