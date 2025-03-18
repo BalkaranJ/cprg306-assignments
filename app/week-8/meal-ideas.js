@@ -21,10 +21,19 @@ export default function MealIdeas({ selectedItem }) {
   // Step 4: Define Load Function
   const loadMeals = async () => {
     if (!selectedItem) return;
+
+    // ✅ Extract only the first word before a comma, and remove emojis
+    const formattedIngredient = selectedItem
+      .toLowerCase()
+      .split(",")[0]  // Get only the first part before a comma
+      .replace(/[^\w\s]/gi, "")  // Remove emojis and special characters
+      .trim();
+
     setLoading(true);
     setError(null);
+
     try {
-      const mealsData = await fetchMeals(selectedItem);
+      const mealsData = await fetchMeals(formattedIngredient);
       setMeals(mealsData);
     } catch (err) {
       setError(err.message);
@@ -32,6 +41,22 @@ export default function MealIdeas({ selectedItem }) {
       setLoading(false);
     }
   };
+
+  /**
+   * const ingredient = "bread 🍞";
+const cleaned = ingredient.replace(/[^\w\s]/gi, "");
+console.log(cleaned); // Output: "bread"
+
+[^...] → "NOT" any of the characters inside the brackets.
+\w → Matches letters (A-Z, a-z), numbers (0-9), and underscores (_).
+\s → Matches spaces.
+[^\w\s] → This means find anything that is NOT a letter, number, underscore, or space.
+/gi:
+g → "Global" → Replace all matches, not just the first one.
+i → "Case-insensitive" (not strictly needed here).
+
+   */
+
 
   // Fetch meals whenever the selected item changes
   useEffect(() => {
